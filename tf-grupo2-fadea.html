@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Caso 2: FAdeA Aviones - Trabajo Final Modelos y Simulación - UCSE</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/dashicons.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {delimiters: [{left: '$$', right: '$$', display: true}, {left: '$', right: '$', display: false}], throwOnError: false});"></script>
+    <style>
+      /* Paleta de colores institucional UCSE (https://www.ucse.edu.ar/) */
+      :root {
+        --ucse-azul-oscuro: #1f3763;
+        --ucse-azul-medio: #2a5298;
+        --ucse-amarillo: #ffd800;
+        --ucse-cian: #00bfff;
+        --ucse-rosa: #ff007f;
+        --ucse-blanco: #ffffff;
+        --ucse-gris-fondo: #f8f9fa;
+        --ucse-texto: #333333;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--ucse-texto);
+        background-color: var(--ucse-gris-fondo);
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: #464feb;
+      }
+
+      tr th, tr td {
+        border: 1px solid #e6e6e6;
+      }
+
+      tr th {
+        background-color: #f5f5f5;
+        color: #1f3763;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        text-wrap: balance;
+      }
+
+      p, li, blockquote {
+        text-wrap: pretty;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+
+      @keyframes shimmer {
+        0% { background-position: -1000px 0; }
+        100% { background-position: 1000px 0; }
+      }
+
+      .header-ucse {
+        background: linear-gradient(135deg, #1f3763 0%, #2a5298 100%);
+        color: #ffffff;
+        padding: 22px 0;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header-ucse::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+        animation: rotate 20s linear infinite;
+      }
+
+      .header-ucse .logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-bottom: 8px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .header-ucse .logo img {
+        height: 80px;
+        border-radius: 50%;
+        box-shadow: 0 2px 10px rgba(255, 255, 255, 0.25);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .header-ucse .logo img:hover {
+        transform: scale(1.08) rotate(4deg);
+        box-shadow: 0 4px 20px rgba(255, 216, 0, 0.45);
+      }
+
+      .header-ucse h1 {
+        margin: 0;
+        font-size: 2.3em;
+        font-weight: 400;
+        letter-spacing: 0.8px;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .header-ucse .subtitle {
+        font-size: 1.15em;
+        color: #e2e8f0;
+        margin-top: 5px;
+      }
+
+      .wp-block-navigation {
+        background: #1f3763;
+        padding: 0;
+        margin: 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .nav-menu {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .nav-menu a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 14px 20px;
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 0.95em;
+        transition: all 0.3s ease;
+        border-bottom: 3px solid transparent;
+      }
+
+      .nav-menu a:hover {
+        background: #00bfff;
+        color: #ffffff;
+        border-bottom-color: #ffd800;
+      }
+
+      .nav-menu a.active {
+        background: #ff007f;
+        color: #ffffff;
+        border-bottom-color: #ffd800;
+        font-weight: 600;
+      }
+
+      .main-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .content-section {
+        background: #ffffff;
+        padding: 32px;
+        margin: 24px 0;
+        border-radius: 8px;
+        box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+        animation: fadeIn 0.6s ease-out;
+      }
+
+      .content-section h1 {
+        color: var(--ucse-azul-oscuro);
+        margin-top: 0;
+        border-bottom: 3px solid var(--ucse-cian);
+        padding-bottom: 12px;
+      }
+
+      .requirements-alert {
+        background: linear-gradient(135deg, #ffd800 0%, #ffe066 100%);
+        color: #1a1a1a;
+        padding: 20px 24px;
+        border-radius: 8px;
+        margin: 20px 0;
+        border-left: 5px solid #ff007f;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .requirements-alert:hover {
+        transform: translateX(4px);
+        box-shadow: 0 4px 15px rgba(255, 216, 0, 0.35);
+      }
+
+      .exercise-section {
+        background: #f8f9fa;
+        border: 2px solid #00bfff;
+        border-radius: 8px;
+        padding: 25px;
+        margin: 25px 0;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .exercise-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #00bfff, #ffd800, #ff007f);
+        background-size: 200% 100%;
+        border-radius: 4px 4px 0 0;
+        animation: shimmer 3s linear infinite;
+      }
+
+      .exercise-section:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 191, 255, 0.18);
+        border-color: #ffd800;
+      }
+
+      .exercise-title {
+        color: #1f3763;
+        margin-top: 0;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e2e8f0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .exercise-weight {
+        background: #00bfff;
+        color: #ffffff;
+        padding: 4px 14px;
+        border-radius: 20px;
+        font-size: 0.82em;
+        font-weight: 700;
+      }
+
+      .wp-block-table {
+        margin: 20px 0;
+        border-radius: 8px;
+        overflow-x: auto;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .wp-block-table table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #ffffff;
+      }
+
+      .wp-block-table th {
+        background-color: #f5f5f5;
+        color: #1f3763;
+        padding: 14px 15px;
+        text-align: left;
+        font-weight: 600;
+        border: 1px solid #e6e6e6;
+      }
+
+      .wp-block-table td {
+        padding: 12px 15px;
+        border: 1px solid #e6e6e6;
+        color: #333333;
+      }
+
+      .wp-block-table tr:nth-child(even) td {
+        background: #f8f9fa;
+      }
+
+      .delivery-section {
+        background: linear-gradient(135deg, #00bfff 0%, #1f3763 100%);
+        color: #ffffff;
+        padding: 25px;
+        border-radius: 8px;
+        margin: 25px 0;
+      }
+
+      .delivery-section h2,
+      .delivery-section p,
+      .delivery-section li,
+      .delivery-section strong {
+        color: #ffffff;
+      }
+
+      .grading-section {
+        background: linear-gradient(135deg, #ff007f 0%, #c90063 100%);
+        color: #ffffff;
+        padding: 28px;
+        border-radius: 8px;
+        margin: 28px 0;
+      }
+
+      .grading-section h2,
+      .grading-section > p {
+        color: #ffffff;
+      }
+
+      .grading-section h2 {
+        margin-top: 0;
+      }
+
+      .grading-section .wp-block-table table {
+        background: #ffffff;
+      }
+
+      .grading-section .wp-block-table th {
+        background-color: #f1f5f9 !important;
+        color: #1f3763 !important;
+        font-weight: 700;
+      }
+
+      .grading-section .wp-block-table td {
+        color: #1e293b !important;
+      }
+
+      .grading-section .wp-block-table td strong {
+        color: #1f3763 !important;
+        font-weight: 700;
+      }
+
+      .grading-section .wp-block-table td:last-child strong {
+        color: #c90063 !important;
+        font-weight: 700;
+        font-size: 1.05em;
+      }
+
+      .conditions-section {
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-left: 6px solid #1f3763;
+        border-radius: 8px;
+        padding: 24px;
+        margin: 28px 0;
+      }
+
+      .conditions-section h2 {
+        color: #1f3763;
+        margin-top: 0;
+        font-size: 1.35em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .icon-text {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 14px 0;
+      }
+
+      .icon-text i {
+        color: #00bfff;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+
+      .requirements-alert .icon-text i {
+        color: #1f3763;
+      }
+
+      .footer-info {
+        background: #1f3763;
+        color: #ffffff;
+        padding: 22px;
+        text-align: center;
+        margin-top: 40px;
+        border-top: 4px solid #ffd800;
+      }
+
+      .footer-info p {
+        margin: 5px 0;
+        color: #e2e8f0;
+      }
+
+      @media (max-width: 768px) {
+        .header-ucse .logo { flex-direction: column; gap: 10px; }
+        .header-ucse h1 { font-size: 1.8em; }
+        .nav-menu { flex-direction: column; }
+        .nav-menu a { justify-content: center; }
+        .content-section { padding: 20px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header-ucse">
+      <div class="main-container">
+        <div class="logo">
+          <img
+            src="public/unnamed.jpg"
+            alt="Logo Universidad Católica de Santiago del Estero - Departamento Académico San Salvador"
+          />
+          <div>
+            <h1>Universidad Católica de Santiago del Estero</h1>
+            <div class="subtitle">Modelos y Simulación — Ciclo Lectivo 2026</div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav class="wp-block-navigation" aria-label="Navegación de casos de estudio">
+      <ul class="nav-menu">
+        <li>
+          <a href="index.html">
+            <i class="fas fa-home"></i>
+            <span>Portal General</span>
+          </a>
+        </li>
+        <li>
+          <a href="tf-grupo1-lapa.html">
+            <i class="fas fa-plane-departure"></i>
+            <span>Caso 1: Check-in Aéreo</span>
+          </a>
+        </li>
+        <li>
+          <a href="tf-grupo2-fadea.html" class="active">
+            <i class="fas fa-fighter-jet"></i>
+            <span>Caso 2: FAdeA Aviones</span>
+          </a>
+        </li>
+        <li>
+          <a href="tf-grupo3-clinica.html">
+            <i class="fas fa-hospital-user"></i>
+            <span>Caso 3: Clínica San Martín</span>
+          </a>
+        </li>
+        <li>
+          <a href="tf-grupo4-puerto.html">
+            <i class="fas fa-ship"></i>
+            <span>Caso 4: Terminal Portuaria</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <div class="main-container">
+      <div class="content-section">
+        <h1><i class="fas fa-clipboard-list"></i> TRABAJO PRÁCTICO FINAL — CASO 2 (GRUPO 2)</h1>
+
+        <div class="requirements-alert">
+          <div class="icon-text">
+            <i class="fas fa-info-circle"></i>
+            <strong>Tema:</strong> Simulación de situaciones reales — Utilización de simulador <strong>FlexSim</strong>
+          </div>
+        </div>
+
+        <div class="exercise-section">
+          <h2 class="exercise-title">
+            <span><i class="fas fa-list-ol"></i> CONSIGNAS METODOLÓGICAS</span>
+            <span class="exercise-weight">Modalidad Regular 2026</span>
+          </h2>
+          <ol>
+            <li>Desarrollar el presente trabajo en forma grupal (no más de 3 integrantes) o según la asignación de la cátedra.</li>
+            <li>
+              Estudiar el caso planteado. Caracterizar el sistema como una red abierta de dos estaciones en serie e identificar el modelo de colas aplicable a cada estación en cada escenario. Identificar en el mismo los siguientes <strong>5 elementos fundamentales</strong>:
+              <ul>
+                <li><strong>Entidades</strong></li>
+                <li><strong>Atributos</strong></li>
+                <li><strong>Actividades</strong></li>
+                <li><strong>Estados</strong></li>
+                <li><strong>Eventos</strong></li>
+              </ul>
+            </li>
+            <li>Resuelva las situaciones que se van planteando combinando el análisis matemático de Teoría de Colas ($M/M/c$, $M/M/1$ y $M/G/1$) con el <strong>Simulador FlexSim</strong>, y determine la respuesta económica y operativa más conveniente para cada caso. <strong>Mantener constantes las condiciones experimentales entre escenarios, salvo el parámetro modificado explícitamente en cada alternativa.</strong></li>
+            <li>
+              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar al menos <strong>10 réplicas independientes de 120 horas efectivas de recolección cada una, utilizando una semilla aleatoria diferente en cada réplica</strong>. Cada réplica deberá proporcionar 120 horas efectivas de recolección de datos, adicionales al período de calentamiento determinado. Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica. Determinar y justificar el período de calentamiento mediante un procedimiento gráfico o estadístico. Podrá utilizarse, por ejemplo, el método gráfico de Welch, el análisis de series temporales acumuladas u otro procedimiento equivalente debidamente fundamentado. Excluir dicho período de la recolección de resultados. Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
+              <br /><br />
+              <strong>Indicadores e Intervalos de Confianza del 95 %:</strong> Para cada escenario, calcular la media, la desviación estándar y el intervalo de confianza del 95 % de todos los indicadores medios solicitados ($\rho_1, \rho_2, L_1, L_2, W_{q1}, W_{q2}, W_1, W_2$). Los costos derivados deberán informarse según corresponda, calculados exclusivamente sobre las observaciones recolectadas tras el período de calentamiento:
+              <ul>
+                <li>Factor de utilización del sistema y de cada servidor verificando su equivalencia bajo el supuesto de servidores homogéneos ($\rho_1, \rho_2$),</li>
+                <li>Inventario en proceso (WIP) esperado en las prensas ($L_1$) y en la estación de inspección ($L_2$),</li>
+                <li>Tiempos medios de espera en cola ($W_{q1}, W_{q2}$) y tiempos totales de permanencia ($W_1, W_2$),</li>
+                <li>Desglose completo y balance del <strong>Costo Total Esperado por Hora</strong> (WIP + Prensas + Inspectores) para cada escenario evaluado.</li>
+              </ul>
+            </li>
+            <li>
+              <strong>Análisis técnico en Documento Word (<code>.docx</code>):</strong> Elabore un informe escrito detallado con la formulación y resolución de los incisos a), b), c) y d), la evaluación de las propuestas y la recomendación cuantitativa final.
+            </li>
+            <li>
+              <strong>Presentación para el día de la Demo (<code>.pptx</code> / PDF):</strong> Prepare una presentación ejecutiva para exponer los resultados obtenidos y demostrar en vivo las simulaciones realizadas en FlexSim.
+            </li>
+          </ol>
+        </div>
+
+        <div class="exercise-section">
+          <h2 class="exercise-title">
+            <span><i class="fas fa-fighter-jet"></i> CASO DE ESTUDIO: FÁBRICA ARGENTINA DE AVIONES (FAdeA)</span>
+            <span class="exercise-weight">Manufactura Aeroespacial</span>
+          </h2>
+
+          <div class="requirements-alert" style="background: #eef2ff; border-left: 5px solid #1f3763; color: #1e293b;">
+            <div class="icon-text">
+              <i class="fas fa-university" style="color: #1f3763;"></i>
+              <strong>Aclaración institucional:</strong> El presente caso constituye una situación hipotética elaborada exclusivamente con fines académicos. Los personajes, datos operativos, costos, decisiones y situaciones descriptas no representan información real de las organizaciones mencionadas.
+            </div>
+          </div>
+
+          <div style="text-align: center; margin: 25px 0;">
+            <img
+              src="public/logo_fadea.svg"
+              alt="Logo Fábrica Argentina de Aviones FAdeA"
+              style="max-width: 420px; width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.12);"
+            />
+          </div>
+
+          <p>
+            La Vicepresidencia de Manufactura y la Gerencia de Producción de la <strong>Fábrica Argentina de Aviones (FAdeA)</strong> han manifestado preocupación por el elevado inventario en proceso (WIP) observado en las áreas de prensado e inspección aeronáutica.
+          </p>
+
+          <div class="requirements-alert">
+            <p>
+              Durante una reciente recorrida de planta en horario operativo, se detectaron de forma puntual <strong>cinco láminas de metal esperando en el sector de prensas</strong> para ser conformadas en secciones de ala, y <strong>trece secciones de ala en la estación de inspección</strong> (una en proceso de revisión y doce aguardando en la fila contigua).
+            </p>
+            <p style="margin-bottom: 0;">
+              Dado que cada sección de ala representa una inversión de capital de cientos de miles de dólares en aleaciones de alta exigencia, acumular unidades inmovilizadas genera costos financieros y de almacenamiento considerables. La Gerencia de Producción ha convocado al especialista de Investigación de Operaciones y Simulación para modelar estocásticamente el flujo productivo, contrastar analítica y empíricamente las propuestas de mejora y formular recomendaciones cuantitativas.
+            </p>
+          </div>
+
+          <div class="requirements-alert" style="background: #fff8e1; border-left: 5px solid #ffb300; color: #5d4037;">
+            <div class="icon-text">
+              <i class="fas fa-exclamation-circle" style="color: #ffb300;"></i>
+              <strong>Nota metodológica sobre las observaciones puntuales:</strong> Los valores observados durante la recorrida (5 láminas en prensas y 13 secciones en inspección) constituyen una realización puntual del sistema y no deben interpretarse como promedios estacionarios. Contrástelos con la distribución obtenida mediante simulación, no únicamente con su valor medio.
+            </div>
+          </div>
+
+          <p>
+            Éste es el sistema operativo que el equipo de ingeniería está estudiando:
+          </p>
+
+          <ul>
+            <li>
+              <strong>Etapa 1 — Sector de Prensado ($c = 10$ prensas en paralelo):</strong> Se utiliza cada una de las <strong>10 prensas hidráulicas idénticas</strong> para formar secciones de ala a partir de grandes láminas de metal especialmente procesado. Las láminas llegan aleatoriamente (proceso de Poisson) a una tasa media de <strong>$\lambda = 7\text{ láminas por hora}$</strong>. El tiempo requerido para que una prensa forme una sección de ala a partir de una lámina tiene una <strong>distribución exponencial con una media de $1\text{ hora}$</strong> ($\mu_1 = 1\text{ sección/hora}$ por prensa). El costo operativo más recuperación de capital de cada prensa en operación normal es de <strong>$\text{USD } 7,00\text{ por hora}$</strong> (es decir, $\text{USD } 70,00/\text{hora}$ por las 10 prensas). Considere que el costo horario indicado se incurre por cada prensa instalada y disponible durante todo el horizonte de operación, independientemente de su utilización instantánea.
+            </li>
+            <li>
+              <strong>Etapa 2 — Estación de Inspección de Calidad ($c = 1$ inspectora):</strong> Para el análisis teórico, modele las llegadas a inspección como un proceso de Poisson con tasa <strong>$\lambda = 7\text{ secciones por hora}$</strong>. En la simulación, las llegadas a inspección serán generadas por las salidas efectivas del sector de prensado (asumiendo que no existen rechazos ni retrabajos). Una sola inspectora tiene el trabajo de tiempo completo de examinar estas secciones de ala para cerciorarse de que cumplen las especificaciones aeronáuticas. Cada inspección necesita en promedio <strong>$7,5\text{ minutos}$ ($7\frac{1}{2}\text{ min}$, distribución exponencial)</strong>, de modo que puede revisar un promedio de <strong>$\mu_2 = 8\text{ secciones de ala por hora}$</strong>. Su compensación salarial actual (incluyendo prestaciones) es de <strong>$\text{USD } 17,00\text{ por hora}$</strong>.
+            </li>
+            <li>
+              <strong>Costo de Inventario en Proceso (WIP):</strong> El costo financiero y de almacenamiento de este inventario en proceso se estima en <strong>$\text{USD } 8,00\text{ por hora}$</strong> por cada lámina de metal que se encuentre en el sector de prensas (en cola o prensándose, $L_1$) o por cada sección de ala que se encuentre en la estación de inspección (en cola o inspeccionándose, $L_2$).
+            </li>
+          </ul>
+
+          <div class="wp-block-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Propuesta de Mejora Evaluada</th>
+                  <th>Cambio Operativo Planteado</th>
+                  <th>Impacto en Costos Directos</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Operación Normal (Base)</strong></td>
+                  <td>10 prensas ($t_{s1} = 1,0\text{ h}$ exp.) + 1 inspectora actual ($t_{s2} = 7,5\text{ min}$ exp.)</td>
+                  <td>Prensas: $\text{USD } 7,00/\text{h}$ c/u • Inspectora: $\text{USD } 17,00/\text{h}$ • WIP: $\text{USD } 8,00/\text{u}\cdot\text{h}$</td>
+                </tr>
+                <tr>
+                  <td><strong>Propuesta 1 (Ajuste de Potencia en Prensas)</strong></td>
+                  <td>La Gerencia propone reducir la potencia de las prensas bajo la hipótesis de que ello podría disminuir la congestión observada en inspección. Evalúe críticamente esta hipótesis (elevando el tiempo medio de formado a <strong>$1,2\text{ horas}$</strong>).<br /><em>Contraste alternativo:</em> Incrementar el poder al máximo reduce el tiempo medio a <strong>$0,8\text{ horas}$</strong>.</td>
+                  <td>Bajar poder ($1,2\text{ h}$): reduce costo de cada prensa de $\text{USD } 7,00$ a <strong>$\text{USD } 6,50/\text{h}$</strong>.<br />Subir poder ($0,8\text{ h}$): eleva costo de cada prensa a <strong>$\text{USD } 7,50/\text{h}$</strong>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Propuesta 2 (Recurso Alternativo con Mayor Velocidad)</strong></td>
+                  <td>Incorporar un recurso de inspección alternativo con menor tiempo medio de servicio: distribución de probabilidad con <strong>media de $7,2\text{ minutos}$ y desviación estándar $\sigma = 5\text{ minutos}$</strong> (modelo $M/G/1$).</td>
+                  <td>El recurso alternativo tiene un costo laboral total de <strong>$\text{USD } 19,00/\text{hora}$</strong> (frente a $\text{USD } 17,00/\text{h}$ actuales).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="exercise-section">
+          <h2 class="exercise-title">
+            <span><i class="fas fa-tasks"></i> RESOLUCIÓN DE SITUACIONES Y ANÁLISIS CUANTITATIVO</span>
+            <span class="exercise-weight">4 Incisos</span>
+          </h2>
+
+          <p>
+            Usted es el especialista en Investigación de Operaciones y Simulación convocado por la Gerencia de Producción. Se le solicita aplicar la teoría de colas y la experimentación en FlexSim para evaluar el impacto de cada propuesta sobre el inventario en proceso y los costos horarios, formulando recomendaciones cuantitativas:
+          </p>
+
+          <div class="icon-text" style="align-items: flex-start;">
+            <i class="fas fa-arrow-right" style="margin-top: 5px;"></i>
+            <div>
+              <strong>a) Línea Base (Operación Normal):</strong> Para contar con una base de comparación, comience evaluando la operación normal. Determine analíticamente y mediante simulación en FlexSim la cantidad esperada de inventario en proceso en las prensas ($L_1$) y en la estación de inspección ($L_2$). Luego calcule el <strong>Costo Total Esperado por Hora</strong> sumando el costo del inventario en proceso ($\text{USD } 8 \times [L_1 + L_2]$), el costo de las 10 prensas y el salario de la inspectora. El Costo Total Esperado por Hora simulado deberá calcularse utilizando únicamente las observaciones recolectadas después del período de calentamiento.
+            </div>
+          </div>
+
+          <div class="icon-text" style="align-items: flex-start;">
+            <i class="fas fa-arrow-right" style="margin-top: 5px;"></i>
+            <div>
+              <strong>b) Evaluación de la Propuesta 1 (Potencia de las Prensas):</strong> ¿Cuál sería el efecto real de la Propuesta 1 (bajar poder a $1,2\text{ h}$ por lámina)? La Gerencia propone reducir la potencia de las prensas bajo la hipótesis de que ello podría disminuir la congestión observada en inspección. Evalúe críticamente esta hipótesis. Verifique previamente la estabilidad de cada configuración y analice por separado el efecto sobre el WIP de prensado y el WIP de inspección. Estime mediante simulación la probabilidad de observar una cantidad igual o superior a la relevada en la recorrida de planta, es decir, $P(N_1 \ge 5)$ para prensas y $P(N_2 \ge 13)$ para inspección, o ubique cada observación dentro de la distribución empírica mediante su percentil correspondiente. Haga comparaciones específicas de WIP y costo total por hora con los resultados de la parte a), y evalúe también la variante opuesta de subir la potencia al máximo ($0,8\text{ h}$ por lámina a $\text{USD } 7,50/\text{h}$ por prensa). Explique claramente este resultado a la Gerencia de Producción.
+            </div>
+          </div>
+
+          <div class="icon-text" style="align-items: flex-start;">
+            <i class="fas fa-arrow-right" style="margin-top: 5px;"></i>
+            <div>
+              <strong>c) Evaluación de la Propuesta 2 (Recurso Alternativo con Tiempo $M/G/1$):</strong> Determine el efecto de la Propuesta 2 (recurso alternativo con menor tiempo medio de servicio: media $7,2\text{ min}$ y desvío estándar $\sigma = 5\text{ min}$, costo laboral total de $\text{USD } 19,00/\text{h}$) aplicando la fórmula de Pollaczek-Khinchine para colas $M/G/1$. Para la simulación, represente el tiempo de inspección mediante una distribución Gamma con media de $7,2\text{ minutos}$ y desviación estándar de $5\text{ minutos}$. Para una parametrización Gamma mediante forma y escala, utilice $k = 2,0736$ y $\theta = 3,4722\text{ minutos}$ ($k = (7,2/5)^2 = 2,0736$; $\theta = 5^2/7,2 = 3,4722\text{ min}$). Si el software emplea otra convención, realice la conversión correspondiente y documéntela. Analice si las diferencias entre los resultados analíticos y simulados pueden atribuirse al tratamiento independiente de las estaciones en el modelo teórico frente al flujo explícito entre estaciones en la simulación. Haga comparaciones específicas de inventario en proceso y costo total por hora con los resultados de la parte a) y explique este resultado a la Gerencia de Producción.
+            </div>
+          </div>
+
+          <div class="icon-text" style="align-items: flex-start;">
+            <i class="fas fa-arrow-right" style="margin-top: 5px;"></i>
+            <div>
+              <strong>d) Recomendación Integral de Ingeniería (Selección del Escenario Óptimo):</strong> Seleccione el escenario con menor Costo Total Esperado por Hora entre las alternativas evaluadas, sujeto a la estabilidad de ambas estaciones. Evalúe obligatoriamente el escenario con dos inspectores en paralelo y potencia normal de las prensas ($t_{s1} = 1,0\text{ h}$, asumiendo para cada inspector un costo de $\text{USD } 17,00\text{ por hora}$ salvo justificación contraria). Luego seleccione justificadamente uno de los otros dos niveles de potencia ($1,2\text{ h}$ o $0,8\text{ h}$) para construir y evaluar una combinación adicional. Compare estas alternativas con los escenarios anteriores y seleccione la alternativa estable de menor Costo Total Esperado por Hora. La conclusión deberá limitarse al conjunto de alternativas efectivamente analizadas. Informe además si existe un conflicto entre minimizar el costo total y minimizar el WIP. Apoye su propuesta con análisis cuantitativos y corridas en FlexSim, detallando el ahorro neto en dólares por hora que se derivaría de sus recomendaciones.
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 35px; margin-bottom: 10px;">
+            <img
+              src="public/ilustracion_fadea.svg"
+              alt="Esquema del problema - FAdeA Aviones"
+              style="max-width: 100%; height: auto; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.08);"
+            />
+          </div>
+        </div>
+
+        <div class="delivery-section">
+          <h2><i class="fas fa-check-double"></i> RESUMEN DE ENTREGABLES PARA EL DÍA DE LA DEMO</h2>
+          <ul>
+            <li><strong>Documento Word (<code>.docx</code>):</strong> Informe técnico completo para la Vicepresidencia de Manufactura y la Gerencia de Producción de FAdeA con el desglose de los 5 elementos del sistema, cálculos de red en serie y justificación económica de los incisos a), b), c) y d).</li>
+            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cuadro comparativo de costos horarios y recolección estadística de las <strong>10 réplicas independientes de 120 horas efectivas de recolección</strong> en FlexSim para cada alternativa (con media, desvío estándar e intervalo de confianza del 95 %).</li>
+            <li><strong>Modelos FlexSim (<code>.fsm</code>):</strong> Modelo de simulación en serie (Source $\to$ Queue1 $\to$ 10 Processors Prensas $\to$ Queue2 $\to$ Processor(s) Inspección $\to$ Sink).</li>
+            <li><strong>Presentación Ejecutiva (<code>.pptx</code> / PDF):</strong> Soporte visual para la defensa oral y demostración en vivo el día de la Demo.</li>
+          </ul>
+        </div>
+
+        <div class="conditions-section">
+          <h2><i class="fas fa-calendar-check"></i> CONDICIONES FORMALES DE ENTREGA Y DEFENSA ORAL</h2>
+          <ul>
+            <li><strong>Fecha y hora límite de entrega:</strong> Viernes 20 de noviembre de 2026, 23:59 hs (hora oficial de la República Argentina).</li>
+            <li><strong>Medio de entrega:</strong> Buzón de tareas oficial habilitado en el Campus Virtual UCSE (Moodle). No se recibirán entregas por correo electrónico ni mensajería privada.</li>
+            <li>
+              <strong>Estructura y nomenclatura obligatoria de archivos:</strong>
+              <ul>
+                <li><code>MS2026_TF_Grupo2_Informe.docx</code> (Informe técnico y administrativo completo).</li>
+                <li><code>MS2026_TF_Grupo2_Datos.xlsx</code> (Planilla estructurada con memoria de cálculo y recolección estadística).</li>
+                <li><code>MS2026_TF_Grupo2_ModelosFlexSim.zip</code> o archivos <code>.fsm</code> ejecutables individuales.</li>
+                <li><code>MS2026_TF_Grupo2_Presentacion.pptx</code> o <code>.pdf</code> (Diapositivas de soporte de la defensa oral).</li>
+              </ul>
+            </li>
+            <li><strong>Defensa oral y demostración en vivo (Demo):</strong> 20 minutos de exposición grupal seguidos de 10 minutos de preguntas técnicas del tribunal docente y ejecución en vivo de los modelos en FlexSim.</li>
+            <li><strong>Participación activa:</strong> Todos los integrantes del grupo deberán exponer y estar técnicamente preparados para responder sobre cualquier sección del trabajo.</li>
+            <li><strong>Operatividad de los modelos:</strong> Es requisito indispensable que los modelos <code>.fsm</code> abran y ejecuten sin errores en FlexSim. Archivos corruptos o que no ejecuten invalidan la parte práctica de simulación.</li>
+          </ul>
+        </div>
+
+        <div class="grading-section">
+          <h2><i class="fas fa-award"></i> RÚBRICA OFICIAL DE EVALUACIÓN DEL TRABAJO FINAL INTEGRADOR</h2>
+          <p>
+            La calificación final contempla la coherencia metodológica y el rigor técnico en los cuatro artefactos obligatorios:
+          </p>
+
+          <div class="wp-block-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Criterio de Evaluación</th>
+                  <th>Artefacto Asociado</th>
+                  <th>Desempeño Esperado (Nivel Avanzado / Competente)</th>
+                  <th>Ponderación</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Formulación del problema y relevamiento de datos</strong></td>
+                  <td>Documento Word (.docx) + Planilla Excel (.xlsx)</td>
+                  <td>Identificación exhaustiva de variables de entrada ($\lambda, \mu, c$), unidades de tiempo homogéneas y supuestos estocásticos del sistema.</td>
+                  <td><strong>15%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>2. Construcción del modelo conceptual</strong></td>
+                  <td>Documento Word (.docx)</td>
+                  <td>Abstracción precisa del sistema real definiendo Entidades, Atributos, Actividades, Estados, Eventos y Notación de Kendall.</td>
+                  <td><strong>15%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>3. Implementación computacional del modelo</strong></td>
+                  <td>Modelo FlexSim (.fsm)</td>
+                  <td>Modelo robusto en FlexSim con lógica consistente, objetos bien configurados (red en serie, <code>Round Robin if Available</code>, Gamma) y ejecución estable.</td>
+                  <td><strong>20%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>4. Verificación, validación y recolección estadística</strong></td>
+                  <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
+                  <td>Registro de al menos 10 réplicas independientes de 120 horas efectivas simuladas en Excel, cálculo de medias, desvíos estándar e intervalos de confianza del 95 %, y validación frente a las fórmulas teóricas de colas.</td>
+                  <td><strong>20%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>5. Análisis de resultados y sensibilidad</strong></td>
+                  <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
+                  <td>Interpretación profunda de indicadores ($\rho_1, \rho_2, L_1, L_2, W_1, W_2$, desglose de costos horarios) y comparación rigurosa entre escenarios.</td>
+                  <td><strong>15%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>6. Conclusiones y toma de decisiones</strong></td>
+                  <td>Documento Word (.docx) + Presentación Demo</td>
+                  <td>Recomendaciones operativas y económicas sólidamente respaldadas por la evidencia cuantitativa del balance de costos de producción.</td>
+                  <td><strong>10%</strong></td>
+                </tr>
+                <tr>
+                  <td><strong>7. Defensa oral, Presentación y Demo en vivo</strong></td>
+                  <td>Presentación (.pptx/PDF) + Demo FlexSim</td>
+                  <td>Claridad expositiva, dominio técnico ante preguntas de la cátedra y demostración fluida del modelo el día de la Demo.</td>
+                  <td><strong>5%</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer-info">
+      <div class="main-container">
+        <p><strong>Universidad Católica de Santiago del Estero</strong></p>
+        <p>Modelos y Simulación — Ciclo Lectivo 2026</p>
+        <p>Trabajo Práctico Final — Caso 2: Fábrica Argentina de Aviones (FAdeA)</p>
+      </div>
+    </footer>
+  </body>
+</html>

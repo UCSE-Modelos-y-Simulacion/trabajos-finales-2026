@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgClinica" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f3763"/>
+      <stop offset="100%" stop-color="#0d9488"/>
+    </linearGradient>
+    <linearGradient id="accentClinica" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff007f"/>
+      <stop offset="100%" stop-color="#00bfff"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="180" rx="16" fill="url(#bgClinica)"/>
+  <rect x="0" y="168" width="500" height="12" rx="4" fill="url(#accentClinica)"/>
+  <circle cx="95" cy="86" r="50" fill="#ffffff" opacity="0.15" stroke="#ffffff" stroke-width="2"/>
+  <rect x="83" y="54" width="24" height="64" rx="4" fill="#ff007f"/>
+  <rect x="63" y="74" width="64" height="24" rx="4" fill="#ff007f"/>
+  <rect x="87" y="58" width="16" height="56" rx="2" fill="#ffffff"/>
+  <rect x="67" y="78" width="56" height="16" rx="2" fill="#ffffff"/>
+  <text x="165" y="72" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="30" font-weight="800" fill="#ffffff" letter-spacing="1">CLÍNICA SAN MARTÍN</text>
+  <text x="165" y="102" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffd800" letter-spacing="1">GUARDIA CENTRAL Y EMERGENCIAS</text>
+  <text x="165" y="130" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="13" fill="#e2e8f0">Boxes de Atención Médica • Triage • SLA Sanitario</text>
+</svg>
+

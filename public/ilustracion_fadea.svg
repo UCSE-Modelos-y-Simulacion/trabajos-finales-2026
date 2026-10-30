@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="hdr2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1f3763"/>
+      <stop offset="100%" stop-color="#2a5298"/>
+    </linearGradient>
+    <marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1f3763"/>
+    </marker>
+  </defs>
+  <rect width="860" height="360" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="2"/>
+  <rect width="860" height="48" rx="14" fill="url(#hdr2)"/>
+  <text x="430" y="30" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff">SISTEMA EN SERIE (TÁNDEM): PRENSAS HIDRÁULICAS (M/M/10) + INSPECCIÓN (M/M/1 ó M/G/1)</text>
+
+  <!-- Arribo Laminas -->
+  <rect x="20" y="125" width="130" height="110" rx="10" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="85" y="155" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#0369a1">LÁMINAS METAL</text>
+  <text x="85" y="178" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700" fill="#1f3763">λ = 7 lám/hora</text>
+  <text x="85" y="198" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">Arribo Poisson</text>
+  <text x="85" y="218" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#dc2626">WIP = USD 8/h c/u</text>
+
+  <line x1="150" y1="180" x2="185" y2="180" stroke="#1f3763" stroke-width="2.5" marker-end="url(#arr2)"/>
+
+  <!-- Etapa 1: 10 Prensas -->
+  <rect x="190" y="85" width="225" height="190" rx="12" fill="#eff6ff" stroke="#1f3763" stroke-width="2"/>
+  <text x="302" y="112" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#1f3763">ETAPA 1: 10 PRENSAS (c = 10)</text>
+  <text x="302" y="132" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#0284c7">Cola M/M/10 • Media = 1,0 h (μ₁ = 1/h)</text>
+  <rect x="210" y="145" width="185" height="34" rx="6" fill="#ffffff" stroke="#93c5fd"/>
+  <text x="302" y="167" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#1e3a8a">Prensas #1 a #10 en Paralelo</text>
+  <text x="302" y="202" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#854d0e">Costo: USD 7,00/h por prensa</text>
+  <text x="302" y="224" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">Propuesta 1: Bajar a 1,2 h (USD 6,50)</text>
+  <text x="302" y="242" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">vs. Subir potencia a 0,8 h (USD 7,50)</text>
+
+  <line x1="415" y1="180" x2="465" y2="180" stroke="#1f3763" stroke-width="2.5" marker-end="url(#arr2)"/>
+  <text x="440" y="168" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="700" fill="#1f3763">λ = 7/h</text>
+
+  <!-- Etapa 2: Estación de Inspección -->
+  <rect x="470" y="85" width="235" height="190" rx="12" fill="#fff1f2" stroke="#ff007f" stroke-width="2"/>
+  <text x="587" y="112" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="14" font-weight="700" fill="#9f1239">ETAPA 2: INSPECCIÓN DE ALAS</text>
+  <text x="587" y="132" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" fill="#be123c">Cuello de Botella Crítico (ρ₂ = 87,5%)</text>
+  <rect x="490" y="145" width="195" height="34" rx="6" fill="#ffffff" stroke="#fda4af"/>
+  <text x="587" y="167" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" font-weight="600" fill="#881337">Actual: 1 Inspectora (7,5 min → μ₂ = 8/h)</text>
+  <text x="587" y="202" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#9f1239">Salario Actual: USD 17,00/h</text>
+  <text x="587" y="224" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">Propuesta 2: Inspector Joven (M/G/1)</text>
+  <text x="587" y="242" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#475569">Media 7,2 min, σ = 5 min (USD 19,00/h)</text>
+
+  <line x1="705" y1="180" x2="740" y2="180" stroke="#1f3763" stroke-width="2.5" marker-end="url(#arr2)"/>
+
+  <!-- Salida -->
+  <rect x="745" y="130" width="95" height="100" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+  <text x="792" y="168" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="700" fill="#166534">ENSAMBLE</text>
+  <text x="792" y="186" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="11" fill="#15803d">FINAL</text>
+  <text x="792" y="206" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="10" fill="#166534">Alas Aprobadas</text>
+
+  <text x="430" y="335" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-style="italic" fill="#475569">Objetivo: Minimizar el Costo Total Esperado por Hora = Costo WIP (USD 8 × [L₁ + L₂]) + Costo Prensas + Costo Inspectores</text>
+</svg>
+

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 180" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgFadea" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1f3763"/>
+    </linearGradient>
+    <linearGradient id="accentFadea" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00bfff"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#ffd800"/>
+    </linearGradient>
+  </defs>
+  <rect width="500" height="180" rx="16" fill="url(#bgFadea)"/>
+  <rect x="0" y="168" width="500" height="12" rx="4" fill="url(#accentFadea)"/>
+  <circle cx="95" cy="86" r="52" fill="#00bfff" opacity="0.15" stroke="#ffd800" stroke-width="2"/>
+  <polygon points="95,42 132,115 95,98 58,115" fill="#00bfff"/>
+  <circle cx="95" cy="86" r="10" fill="#ffd800"/>
+  <text x="170" y="72" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="36" font-weight="800" fill="#ffffff" letter-spacing="2">FAdeA</text>
+  <text x="170" y="102" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="15" font-weight="700" fill="#ffd800" letter-spacing="1">FÁBRICA ARGENTINA DE AVIONES</text>
+  <text x="170" y="130" font-family="Segoe UI, Roboto, Arial, sans-serif" font-size="13" fill="#e2e8f0">Manufactura de Secciones de Ala • Control de WIP</text>
+</svg>
+
