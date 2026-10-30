@@ -8,3 +8,7 @@ Thumbs.db
 # Temporary logs
 *.log
 
+# Documentos internos de la cátedra (Resoluciones docentes)
+Resolucion*.md
+Resolucion - *.md
+
