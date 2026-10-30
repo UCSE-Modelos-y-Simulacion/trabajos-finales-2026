@@ -8,7 +8,7 @@
 * **Jefe de Trabajos Prácticos:** Ing. Fabio Damián Argañaraz Azua
 
 🌐 **Portal Web Oficial del Trabajo Final (GitHub Pages):**  
-👉 **[https://fabiodrizzt.github.io/modelos-y-simulacion-trabajos-finales-2026/](https://fabiodrizzt.github.io/modelos-y-simulacion-trabajos-finales-2026/)**
+👉 **[https://ucse-modelos-y-simulacion.github.io/modelos-y-simulacion-trabajos-finales-2026/](https://ucse-modelos-y-simulacion.github.io/modelos-y-simulacion-trabajos-finales-2026/)**
 
 ---
 
