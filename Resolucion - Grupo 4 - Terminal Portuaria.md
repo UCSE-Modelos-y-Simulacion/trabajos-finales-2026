@@ -96,12 +96,11 @@ Evaluando $P(W_q \le t) = 1 - P(W_q > 0) \cdot e^{-c \mu (1 - \rho) t}$ para $t 
 ## 3. Pautas para la Simulación en FlexSim y Procesamiento en Excel
 * **Configuraciones experimentales obligatorias (4 modelos):**
   Se deberán modelar y evaluar en FlexSim 4 configuraciones: 1) Situación actual ($c = 4$), 2) Cumplimiento estricto del SLA ($c = 6$), 3) Alternativa 1: Sistema Smart-Gate ($c = 5, \lambda' = 21$) y 4) Alternativa 2: Modernización de Spreaders ($c = 5, \mu' = 10$).
-* **Condiciones experimentales:** Mantener estrictamente constantes las condiciones experimentales entre escenarios, excepto el parámetro evaluado ($\lambda$, $\mu$ o $c$). Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica.
-* **Warm-up y réplicas:**
-  * Realizar al menos **10 réplicas independientes, utilizando una semilla aleatoria diferente en cada réplica. Cada réplica deberá comprender un período de calentamiento, determinado y justificado mediante un procedimiento gráfico (método de Welch, series temporales acumuladas) o estadístico, seguido de 120 horas efectivas de recolección de resultados. El período de calentamiento no deberá incluirse dentro de esas 120 horas.**
+* **Condiciones experimentales:** Mantener estrictamente constantes las condiciones experimentales entre escenarios, excepto el parámetro evaluado ($\lambda$, $\mu$ o $c$).
+* **Warm-up y horizonte de simulación:**
+  * Realizar una corrida de simulación de **120 horas efectivas de recolección de datos** en FlexSim para cada configuración.
+  * Cada corrida deberá comprender un período de calentamiento, determinado y justificado mediante un procedimiento gráfico o estadístico, seguido de 120 horas efectivas de recolección de resultados. El período de calentamiento no deberá incluirse dentro de esas 120 horas.
   * Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
-* **Procesamiento estadístico en Excel:**
-  * Calcular intervalos de confianza del 95 % para, como mínimo, $W_q$, $W$, $L_q$, $L$, $P(W_q > 0)$ y el porcentaje de cumplimiento del SLA ($P(W_q \le 6\text{ min})$). La utilización de cada servidor deberá informarse mediante su media y desviación estándar entre réplicas.
-  * Los intervalos de confianza deberán calcularse utilizando como observaciones las medias obtenidas en cada réplica independiente:
-    $$\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i, \quad s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_i - \bar{X})^2}, \quad \text{IC}_{95\%} = \left[\bar{X} - t_{9;\,0,025}\frac{s}{\sqrt{10}}, \; \bar{X} + t_{9;\,0,025}\frac{s}{\sqrt{10}}\right]$$
+* **Procesamiento de datos en Excel:**
+  * Para cada configuración, registrar en Excel los indicadores operativos simulados en FlexSim ($W_q, W, L_q, L, \rho$) y contrastarlos con los cálculos analíticos teóricos de colas.
   * **Verificación de utilizaciones:** Contrastar la utilización media teórica del sistema $\rho = \frac{\lambda}{c\mu}$ con la utilización de cada una de las grúas individuales en FlexSim, verificando si la asignación de camiones genera cargas de trabajo balanceadas entre servidores homogéneos.

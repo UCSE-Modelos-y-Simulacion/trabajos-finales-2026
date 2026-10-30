@@ -33,7 +33,7 @@ Cada grupo de estudiantes desarrollará el análisis estocástico combinando la 
 ## 📦 Paquete de Entregables Exigidos
 Para la defensa y demostración (Demo), cada grupo deberá presentar los siguientes cuatro artefactos obligatorios:
 1. **Informe Administrativo y Técnico en Word (`.docx`):** Identificación de los 5 elementos del sistema, formulación analítica paso a paso, análisis crítico y recomendación fundamentada.
-2. **Memoria de Cálculo y Planilla de Datos en Excel (`.xlsx`):** Formulación teórica, recolección estadística de al menos 10 réplicas independientes de 120 horas efectivas por escenario, medias, desvíos estándar e intervalos de confianza del 95 %.
+2. **Memoria de Cálculo y Planilla de Datos en Excel (`.xlsx`):** Formulación teórica, recolección de datos de la simulación de 120 horas efectivas en FlexSim por escenario y validación cuantitativa frente a los modelos teóricos de colas.
 3. **Modelos Computacionales Ejecutables en FlexSim (`.fsm`):** Modelos 3D funcionales del caso base y de cada alternativa de mejora con sus respectivos *dashboards*.
 4. **Presentación Ejecutiva para el Día de la Demo (`.pptx` / PDF):** Diapositivas de soporte visual para la defensa oral de 20 minutos.
 

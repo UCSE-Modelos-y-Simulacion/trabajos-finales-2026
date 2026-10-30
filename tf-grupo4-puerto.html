@@ -491,15 +491,14 @@
             </li>
             <li>Resuelva las situaciones que se van planteando utilizando los modelos matemáticos de Teoría de Colas y el <strong>Simulador FlexSim</strong>, determinando la respuesta conveniente para cada escenario conforme a los resultados de la simulación. <strong>Mantener constantes las condiciones experimentales entre escenarios, salvo el parámetro modificado explícitamente en cada alternativa.</strong></li>
             <li>
-              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar al menos <strong>10 réplicas independientes, utilizando una semilla aleatoria diferente en cada réplica. Cada réplica deberá comprender un período de calentamiento, determinado y justificado mediante un procedimiento gráfico o estadístico, seguido de 120 horas efectivas de recolección de resultados. El período de calentamiento no deberá incluirse dentro de esas 120 horas.</strong> Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica. Podrá utilizarse, por ejemplo, el método gráfico de Welch, el análisis de series temporales acumuladas u otro procedimiento equivalente debidamente fundamentado. Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
+              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar una corrida de simulación de <strong>120 horas efectivas de recolección de datos en FlexSim</strong> para cada configuración. La simulación deberá contemplar un período de calentamiento previo suficiente para alcanzar el régimen estacionario (el cual no deberá incluirse dentro de esas 120 horas), o bien demostrar que las condiciones iniciales representan adecuadamente el estado estacionario.
               <br /><br />
-              <strong>Indicadores e Intervalos de Confianza del 95 %:</strong> Calcular intervalos de confianza del 95 % para, como mínimo, $W_q$, $W$, $L_q$, $L$, $P(W_q > 0)$ y el porcentaje de cumplimiento del SLA ($P(W_q \le 6\text{ min})$). La utilización de cada servidor deberá informarse mediante su media y desviación estándar entre réplicas. Los intervalos de confianza deberán calcularse utilizando como observaciones las medias obtenidas en cada réplica independiente. Los costos derivados deberán informarse según corresponda, aclarando el procedimiento de cálculo utilizado:
+              <strong>Indicadores operativos del sistema:</strong> Para cada configuración, recolectar en FlexSim y contrastar con los cálculos teóricos del modelo $M/M/c$ en Excel los siguientes indicadores clave:
               <ul>
-                <li>Factor de utilización del sistema y de cada servidor, verificando si las utilizaciones individuales son equivalentes bajo el supuesto de servidores homogéneos ($\rho$),</li>
-                <li>Probabilidad de que un camión deba esperar en la fila ($P(W_q > 0)$),</li>
-                <li>Tiempo medio de espera en fila ($W_q$) y tiempo total de permanencia ($W$),</li>
-                <li>Porcentaje de camiones con espera <strong>menor o igual que 6 minutos</strong> ($P(W_q \le 6\text{ min})$),</li>
-                <li>Longitud media de la fila de camiones ($L_q$) y cantidad media en la terminal ($L$).</li>
+                <li>Factor de utilización del sistema y de cada grúa pórtico, verificando si las utilizaciones individuales son equivalentes bajo el supuesto de servidores homogéneos ($\rho$),</li>
+                <li>Tiempo medio de espera en fila ($W_q$) y tiempo total de permanencia en terminal ($W$),</li>
+                <li>Longitud media de la fila de camiones ($L_q$) y cantidad media en la terminal ($L$),</li>
+                <li>Costos operativos y de equipamiento según corresponda a cada alternativa evaluada.</li>
               </ul>
             </li>
             <li>
@@ -622,7 +621,7 @@
           <h2><i class="fas fa-check-double"></i> RESUMEN DE ENTREGABLES PARA EL DÍA DE LA DEMO</h2>
           <ul>
             <li><strong>Documento Word (<code>.docx</code>):</strong> Informe técnico completo para la Gerencia de Operaciones de la Terminal Portuaria del Plata con los 5 elementos del sistema, memoria de cálculo y recomendación estratégica.</li>
-            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cálculos teóricos del modelo $M/M/c$ y recolección estadística de las <strong>10 réplicas independientes de 120 horas efectivas de recolección</strong> en FlexSim para cada configuración (media, desvío estándar e intervalo de confianza del 95 %).</li>
+            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cálculos teóricos del modelo $M/M/c$ en Excel y recolección de los datos de la simulación de <strong>120 horas efectivas de recolección</strong> en FlexSim para cada configuración y su contrastación con la teoría.</li>
             <li><strong>Modelos FlexSim (<code>.fsm</code>):</strong> Archivos de simulación configurados con la dotación actual de grúas, la ampliación de equipos y las alternativas Smart-Gate y Spreader Láser.</li>
             <li><strong>Presentación Ejecutiva (<code>.pptx</code> / PDF):</strong> Diapositivas de síntesis para la defensa oral y demostración en vivo el día de la Demo.</li>
           </ul>
@@ -686,13 +685,13 @@
                 <tr>
                   <td><strong>4. Verificación, validación y recolección estadística</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Registro de al menos 10 réplicas independientes de 120 horas efectivas simuladas en Excel, cálculo de medias, desvíos estándar e intervalos de confianza del 95 %, y validación frente a las fórmulas teóricas de colas.</td>
+                  <td>Registro de la simulación de 120 horas efectivas en FlexSim y procesamiento en Excel, cálculo y comparación de los indicadores operativos ($\rho, L_q, L, W_q, W$) y validación frente a las fórmulas teóricas de colas.</td>
                   <td><strong>20%</strong></td>
                 </tr>
                 <tr>
                   <td><strong>5. Análisis de resultados y sensibilidad</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Interpretación profunda de indicadores ($\rho, P_0, P(\text{espera}), L_q, L, W_q, W$, percentiles de SLA portuario) y comparación rigurosa entre escenarios.</td>
+                  <td>Interpretación profunda de indicadores ($\rho, P_0, L_q, L, W_q, W$, nivel de servicio portuario) y comparación rigurosa entre escenarios.</td>
                   <td><strong>15%</strong></td>
                 </tr>
                 <tr>

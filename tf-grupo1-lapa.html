@@ -491,12 +491,11 @@
             </li>
             <li>Resuelva las situaciones que se van planteando combinando el análisis matemático de Teoría de Colas con el <strong>Simulador FlexSim</strong>, y determine la respuesta conveniente para cada inciso conforme a la evidencia cuantitativa obtenida. <strong>Mantener constantes las condiciones experimentales entre escenarios, salvo el parámetro modificado explícitamente en cada alternativa.</strong></li>
             <li>
-              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar al menos <strong>10 réplicas independientes de 120 horas efectivas de recolección cada una, utilizando una semilla aleatoria diferente en cada réplica</strong>. Cada réplica deberá proporcionar 120 horas efectivas de recolección de datos, adicionales al período de calentamiento determinado. Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica. Determinar y justificar el período de calentamiento mediante un procedimiento gráfico o estadístico. Podrá utilizarse, por ejemplo, el método gráfico de Welch, el análisis de series temporales acumuladas u otro procedimiento equivalente debidamente fundamentado. Excluir dicho período de la recolección de resultados. Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
+              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar una corrida de simulación de <strong>120 horas efectivas de recolección de datos en FlexSim</strong> para cada escenario. La simulación deberá comprender un período de calentamiento previo suficiente para alcanzar el régimen estacionario (el cual no deberá incluirse dentro de las 120 horas de recolección de resultados), o bien justificar que las condiciones iniciales representan adecuadamente el estado estacionario.
               <br /><br />
-              <strong>Indicadores e Intervalos de Confianza del 95 %:</strong> Para cada escenario, calcular la media, la desviación estándar y el intervalo de confianza del 95 % de todos los indicadores medios solicitados ($\rho, W_q, W, L_q, L$). Los máximos, percentiles y costos derivados deberán informarse según corresponda, aclarando el procedimiento de cálculo utilizado:
+              <strong>Indicadores operativos del sistema:</strong> Para cada escenario, recolectar en FlexSim y contrastar con los cálculos teóricos del modelo de colas en Excel los siguientes indicadores clave:
               <ul>
                 <li>Factor de utilización del sistema y de cada servidor verificando su equivalencia bajo el supuesto de servidores homogéneos ($\rho$),</li>
-                <li>Proporción estimada de pasajeros cuyo tiempo de espera en cola sea mayor que cero ($P(W_q > 0)$),</li>
                 <li>Tiempo medio en cola ($W_q$) y tiempo total en sistema ($W$),</li>
                 <li>Longitud media de cola ($L_q$) y cantidad media en el sector ($L$),</li>
                 <li>Ocupación máxima de fila de la cola correspondiente y percentiles de diseño.</li>
@@ -594,13 +593,13 @@
           </h2>
 
           <p>
-            Confeccione el informe técnico en Word, la planilla de datos en Excel con al menos 10 réplicas independientes de 120 horas efectivas de recolección por escenario y la presentación para el día de la Demo respondiendo bajo las siguientes directivas:
+            Confeccione el informe técnico en Word, la planilla de datos en Excel con la simulación de 120 horas efectivas de recolección por escenario y la presentación para el día de la Demo respondiendo bajo las siguientes directivas:
           </p>
 
           <div class="icon-text" style="align-items: flex-start;">
             <i class="fas fa-arrow-right" style="margin-top: 5px;"></i>
             <div>
-              <strong>1ro. Diagnóstico de la Operación Actual Unificada ($M/M/4$):</strong> Para los momentos de mayor afluencia en el esquema actual (una sola fila y 4 mostradores atendidos por 4 agentes), determine teóricamente y mediante simulación en FlexSim: el factor de utilización de los mostradores ($\rho$), la proporción estimada de pasajeros cuyo tiempo de espera en cola sea mayor que cero ($P(W_q > 0)$), el número promedio de pasajeros que se encuentran esperando en la fila ($L_q$), la cantidad total de pasajeros en el sector ($L$) y cuánto tiempo en promedio (en minutos) emplean en la fila ($W_q$) y desde el momento en que ingresan a la cola hasta que finalizan por completo la operación de <em>check-in</em> ($W$).
+              <strong>1ro. Diagnóstico de la Operación Actual Unificada ($M/M/4$):</strong> Para los momentos de mayor afluencia en el esquema actual (una sola fila y 4 mostradores atendidos por 4 agentes), determine teóricamente y mediante simulación en FlexSim: el factor de utilización de los mostradores ($\rho$), el número promedio de pasajeros que se encuentran esperando en la fila ($L_q$), la cantidad total de pasajeros en el sector ($L$) y cuánto tiempo en promedio (en minutos) emplean en la fila ($W_q$) y desde el momento en que ingresan a la cola hasta que finalizan por completo la operación de <em>check-in</em> ($W$).
             </div>
           </div>
 
@@ -614,7 +613,7 @@
                 <li><strong>Fila 1 (Casos Especiales — $1\text{ agente}$, $M/M/1$):</strong> Dedicada exclusivamente a la atención de los pasajeros con problemas especiales. El análisis detallado de datos revela que un promedio de <strong>$12\text{ de los } 132\text{ pasajeros por hora}$</strong> solicitan este trato especial, requiriendo un tiempo promedio de atención de <strong>$3\text{ minutos}$</strong> por pasajero ($\mu_1 = 20\text{ pas/h}$).</li>
                 <li><strong>Fila 2 (Check-in Regular — $3\text{ agentes}$, $M/M/3$):</strong> Dedicada exclusivamente a los restantes <strong>$120\text{ pasajeros por hora}$</strong> que solo deben hacer el <em>check-in</em> estándar, quienes requieren en promedio <strong>$80\text{ segundos}$</strong> para registrarse ($\mu_2 = 45\text{ pas/h}$ por agente).</li>
               </ul>
-              Para cada una de las dos colas determine su extensión media ($L_q$), el estado general del sistema ($L, \rho$), el tiempo de espera y permanencia total ($W_q, W$) y calcule también, para cada subcola, la proporción de pasajeros que debe esperar antes de comenzar la atención, $P(W_q > 0)$.
+              Para cada una de las dos colas determine su extensión media ($L_q$), el estado general del sistema ($L, \rho$) y el tiempo de espera y permanencia total ($W_q, W$).
               <br /><br />
               Para comparar el sistema dividido con el sistema unificado: para los tiempos medios experimentados por un pasajero, utilice ponderación según la proporción de arribos (12/132 y 120/132). Para cantidades promedio presentes en el sistema, como $L$ y $L_q$, informe los valores de cada subsistema y obtenga el total mediante su suma. No promedie indiscriminadamente indicadores de distinta naturaleza. Informe también los resultados de cada grupo por separado para evitar que el promedio global oculte diferencias en el nivel de servicio.
               <br /><br />
@@ -630,14 +629,14 @@
                 <li><strong>Cola de Despacho de Bodega:</strong> Para pasajeros que deben despachar valijas en bodega. El análisis estadístico revela que, en promedio, de los $120\text{ pasajeros por hora}$, <strong>$54\text{ pasajeros/hora}$ ($45\%$)</strong> deben despachar equipaje y requieren un promedio de <strong>$96\text{ segundos}$</strong> cada uno para ser atendidos ($\mu = 37,5\text{ pas/h}$).</li>
                 <li><strong>Cola Express de Cabina (Carry-on):</strong> Para el <strong>$55\%$ restante ($66\text{ pasajeros/hora}$)</strong> que solo lleva bolsos de mano autorizados en cabina, quienes son atendidos en un promedio de <strong>$48\text{ segundos}$</strong> por pasajero ($\mu = 75\text{ pas/h}$).</li>
               </ul>
-              Admitiendo tasas de llegada de Poisson y tiempos de servicio exponenciales: Determine la única asignación entera de los tres agentes entre estas dos nuevas colas que permite que ambas subcolas sean estables ($\rho &lt; 1$). Simule y calcule los indicadores de ambas sub-colas y evalúe si la propuesta del Sr. Moreno resulta conveniente respecto de los escenarios 1ro y 2do. Calcule también, para cada subcola, la proporción de pasajeros que debe esperar antes de comenzar la atención, $P(W_q > 0)$. Diferencie expresamente estabilidad matemática de calidad del servicio: una configuración con $\rho &lt; 1$ puede presentar tiempos de espera y longitudes de cola elevados.
+              Admitiendo tasas de llegada de Poisson y tiempos de servicio exponenciales: Determine la única asignación entera de los tres agentes entre estas dos nuevas colas que permite que ambas subcolas sean estables ($\rho &lt; 1$). Simule y calcule los indicadores de ambas sub-colas y evalúe si la propuesta del Sr. Moreno resulta conveniente respecto de los escenarios 1ro y 2do. Diferencie expresamente estabilidad matemática de calidad del servicio: una configuración con $\rho &lt; 1$ puede presentar tiempos de espera y longitudes de cola elevados.
             </div>
           </div>
 
           <div class="icon-text" style="align-items: flex-start;">
             <i class="fas fa-arrow-right" style="margin-top: 5px;"></i>
             <div>
-              <strong>4to. Diseño de Capacidad de Sala de Espera (Dimensionamiento de Butacas):</strong> Un directivo de infraestructura aeroportuaria propone que, si los pasajeros pudiesen aguardar sentados la llegada de su turno de atención mediante un turnero digital, las molestias percibidas serían mucho menos sensibles. En tal supuesto: <strong>realice el dimensionamiento de butacas para el escenario que considere óptimo y justifique su elección</strong>. Indique expresamente si propone una sala de espera común o sectores separados. Si la sala es común, dimensione las butacas a partir de la distribución de la cantidad total simultánea de pasajeros en espera. Si propone sectores separados, calcule los percentiles 95 y 99 para cada cola y justifique la asignación de butacas. Dimensione la cantidad de butacas utilizando los percentiles 95 y 99 de la distribución estacionaria de la cantidad de pasajeros en cola. Compare esos valores teóricos con la distribución empírica de la ocupación de la fila y con el máximo observado en las réplicas de FlexSim. El máximo observado deberá utilizarse como información complementaria y no como único criterio de dimensionamiento, debido a su sensibilidad a la duración de la réplica y a la semilla aleatoria.
+              <strong>4to. Diseño de Capacidad de Sala de Espera (Dimensionamiento de Butacas):</strong> Un directivo de infraestructura aeroportuaria propone que, si los pasajeros pudiesen aguardar sentados la llegada de su turno de atención mediante un turnero digital, las molestias percibidas serían mucho menos sensibles. En tal supuesto: <strong>realice el dimensionamiento de butacas para el escenario que considere óptimo y justifique su elección</strong>. Indique expresamente si propone una sala de espera común o sectores separados. Si la sala es común, dimensione las butacas a partir de la distribución de la cantidad total simultánea de pasajeros en espera. Si propone sectores separados, calcule los percentiles 95 y 99 para cada cola y justifique la asignación de butacas. Dimensione la cantidad de butacas utilizando los percentiles 95 y 99 de la distribución estacionaria de la cantidad de pasajeros en cola. Compare esos valores teóricos con el máximo observado en la simulación de FlexSim. El máximo observado deberá utilizarse como información complementaria y no como único criterio de dimensionamiento, debido a su sensibilidad a la duración de la simulación.
             </div>
           </div>
 
@@ -654,7 +653,7 @@
           <h2><i class="fas fa-check-double"></i> RESUMEN DE ENTREGABLES PARA EL DÍA DE LA DEMO</h2>
           <ul>
             <li><strong>Documento Word (<code>.docx</code>):</strong> Informe administrativo y técnico dirigido a la Gerencia de Operaciones de la compañía aérea del caso con los 5 elementos del sistema, memoria de cálculo de los 4 puntos y recomendación final.</li>
-            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cálculos teóricos de los escenarios (Base $M/M/4$, Especiales $M/M/1$ + Check-in $M/M/3$, y Bodega $M/M/2$ + Cabina $M/M/1$) junto con la tabla de recolección de datos de las <strong>10 réplicas independientes de 120 horas efectivas</strong> en FlexSim (con media, desvío estándar e intervalos de confianza del 95 %).</li>
+            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cálculos teóricos de los escenarios (Base $M/M/4$, Especiales $M/M/1$ + Check-in $M/M/3$, y Bodega $M/M/2$ + Cabina $M/M/1$) junto con la tabla de recolección de datos de la simulación de <strong>120 horas efectivas de recolección</strong> en FlexSim y su contrastación con la teoría.</li>
             <li><strong>Modelos FlexSim (<code>.fsm</code>):</strong> Archivos de simulación configurados y listos para ejecutar en vivo.</li>
             <li><strong>Presentación Ejecutiva (<code>.pptx</code> / PDF):</strong> Diapositivas con cuadros comparativos de tiempos de espera, longitudes de cola y cantidad de butacas para la defensa oral.</li>
           </ul>
@@ -718,13 +717,13 @@
                 <tr>
                   <td><strong>4. Verificación, validación y recolección estadística</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Registro de al menos 10 réplicas independientes de 120 horas efectivas simuladas en Excel, cálculo de medias, desvíos estándar e intervalos de confianza del 95 %, y validación frente a las fórmulas teóricas de colas.</td>
+                  <td>Registro de la simulación de 120 horas efectivas en FlexSim y procesamiento en Excel, cálculo y comparación de los indicadores operativos ($\rho, L_q, L, W_q, W$) y validación frente a las fórmulas teóricas de colas.</td>
                   <td><strong>20%</strong></td>
                 </tr>
                 <tr>
                   <td><strong>5. Análisis de resultados y sensibilidad</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Interpretación profunda de indicadores ($\rho, P_0, P(\text{espera}), L_q, L, W_q, W$, percentiles) y comparación rigurosa entre escenarios.</td>
+                  <td>Interpretación profunda de indicadores ($\rho, P_0, L_q, L, W_q, W$, percentiles) y comparación rigurosa entre escenarios.</td>
                   <td><strong>15%</strong></td>
                 </tr>
                 <tr>

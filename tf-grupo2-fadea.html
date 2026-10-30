@@ -491,9 +491,9 @@
             </li>
             <li>Resuelva las situaciones que se van planteando combinando el análisis matemático de Teoría de Colas ($M/M/c$, $M/M/1$ y $M/G/1$) con el <strong>Simulador FlexSim</strong>, y determine la respuesta económica y operativa más conveniente para cada caso. <strong>Mantener constantes las condiciones experimentales entre escenarios, salvo el parámetro modificado explícitamente en cada alternativa.</strong></li>
             <li>
-              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar al menos <strong>10 réplicas independientes de 120 horas efectivas de recolección cada una, utilizando una semilla aleatoria diferente en cada réplica</strong>. Cada réplica deberá proporcionar 120 horas efectivas de recolección de datos, adicionales al período de calentamiento determinado. Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica. Determinar y justificar el período de calentamiento mediante un procedimiento gráfico o estadístico. Podrá utilizarse, por ejemplo, el método gráfico de Welch, el análisis de series temporales acumuladas u otro procedimiento equivalente debidamente fundamentado. Excluir dicho período de la recolección de resultados. Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
+              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar una corrida de simulación de <strong>120 horas efectivas de recolección de datos en FlexSim</strong> para cada escenario. La simulación deberá contemplar un período de calentamiento previo suficiente para alcanzar el régimen estacionario (el cual no deberá incluirse dentro de las 120 horas de recolección), o bien justificar que las condiciones iniciales representan adecuadamente el estado estacionario.
               <br /><br />
-              <strong>Indicadores e Intervalos de Confianza del 95 %:</strong> Para cada escenario, calcular la media, la desviación estándar y el intervalo de confianza del 95 % de todos los indicadores medios solicitados ($\rho_1, \rho_2, L_1, L_2, W_{q1}, W_{q2}, W_1, W_2$). Los costos derivados deberán informarse según corresponda, calculados exclusivamente sobre las observaciones recolectadas tras el período de calentamiento:
+              <strong>Indicadores operativos y costos:</strong> Para cada escenario, recolectar en FlexSim y contrastar con los cálculos teóricos del modelo en Excel los siguientes indicadores clave ($\rho_1, \rho_2, L_1, L_2, W_{q1}, W_{q2}, W_1, W_2$):
               <ul>
                 <li>Factor de utilización del sistema y de cada servidor verificando su equivalencia bajo el supuesto de servidores homogéneos ($\rho_1, \rho_2$),</li>
                 <li>Inventario en proceso (WIP) esperado en las prensas ($L_1$) y en la estación de inspección ($L_2$),</li>
@@ -648,7 +648,7 @@
           <h2><i class="fas fa-check-double"></i> RESUMEN DE ENTREGABLES PARA EL DÍA DE LA DEMO</h2>
           <ul>
             <li><strong>Documento Word (<code>.docx</code>):</strong> Informe técnico completo para la Vicepresidencia de Manufactura y la Gerencia de Producción de FAdeA con el desglose de los 5 elementos del sistema, cálculos de red en serie y justificación económica de los incisos a), b), c) y d).</li>
-            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cuadro comparativo de costos horarios y recolección estadística de las <strong>10 réplicas independientes de 120 horas efectivas de recolección</strong> en FlexSim para cada alternativa (con media, desvío estándar e intervalo de confianza del 95 %).</li>
+            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cuadro comparativo de costos horarios y recolección de datos de la simulación de <strong>120 horas efectivas de recolección</strong> en FlexSim para cada alternativa y su contrastación con el modelo analítico.</li>
             <li><strong>Modelos FlexSim (<code>.fsm</code>):</strong> Modelo de simulación en serie (Source $\to$ Queue1 $\to$ 10 Processors Prensas $\to$ Queue2 $\to$ Processor(s) Inspección $\to$ Sink).</li>
             <li><strong>Presentación Ejecutiva (<code>.pptx</code> / PDF):</strong> Soporte visual para la defensa oral y demostración en vivo el día de la Demo.</li>
           </ul>
@@ -712,7 +712,7 @@
                 <tr>
                   <td><strong>4. Verificación, validación y recolección estadística</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Registro de al menos 10 réplicas independientes de 120 horas efectivas simuladas en Excel, cálculo de medias, desvíos estándar e intervalos de confianza del 95 %, y validación frente a las fórmulas teóricas de colas.</td>
+                  <td>Registro de la simulación de 120 horas efectivas en FlexSim y procesamiento en Excel, cálculo y comparación de los indicadores operativos ($\rho_1, \rho_2, L_1, L_2, W_1, W_2$, costos) y validación frente a las fórmulas teóricas de colas.</td>
                   <td><strong>20%</strong></td>
                 </tr>
                 <tr>

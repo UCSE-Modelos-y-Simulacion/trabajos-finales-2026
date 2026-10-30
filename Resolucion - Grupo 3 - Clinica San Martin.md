@@ -94,12 +94,11 @@ Evaluando $P(W_q \le t) = 1 - P(W_q > 0) \cdot e^{-c \mu (1 - \rho) t}$ para $t 
 ## 3. Pautas para la Simulación en FlexSim y Procesamiento en Excel
 * **Configuraciones experimentales obligatorias (4 modelos):**
   Se deberán modelar y evaluar en FlexSim 4 configuraciones: 1) Situación actual ($c = 9$), 2) Cumplimiento estricto del SLA ($c = 12$), 3) Alternativa 1: Tele-Triage ($c = 9, \lambda' = 27$) y 4) Alternativa 2: Historia Clínica con IA ($c = 10, \mu' = 6$).
-* **Condiciones experimentales:** Mantener constantes los parámetros experimentales entre réplicas y escenarios (disciplina FIFO, capacidad infinita, distribución de tiempos de arribo y atención), variando únicamente la dotación $c$, la tasa $\lambda$ o la tasa $\mu$ según el escenario. Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica.
-* **Warm-up y réplicas:**
-  * Realizar al menos **10 réplicas independientes, utilizando una semilla aleatoria diferente en cada réplica. Cada réplica deberá comprender un período de calentamiento, determinado y justificado mediante un procedimiento gráfico (método de Welch, series temporales acumuladas) o estadístico, seguido de 120 horas efectivas de recolección de resultados. El período de calentamiento no deberá incluirse dentro de esas 120 horas.**
+* **Condiciones experimentales:** Mantener constantes los parámetros experimentales entre escenarios (disciplina FIFO, capacidad infinita, distribución de tiempos de arribo y atención), variando únicamente la dotación $c$, la tasa $\lambda$ o la tasa $\mu$ según el escenario.
+* **Warm-up y horizonte de simulación:**
+  * Realizar una corrida de simulación de **120 horas efectivas de recolección de datos** en FlexSim para cada configuración.
+  * Cada corrida deberá comprender un período de calentamiento, determinado y justificado mediante un procedimiento gráfico o estadístico, seguido de 120 horas efectivas de recolección de resultados. El período de calentamiento no deberá incluirse dentro de esas 120 horas.
   * Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
-* **Procesamiento estadístico en Excel:**
-  * Calcular intervalos de confianza del 95 % para, como mínimo, $W_q$, $W$, $L_q$, $L$, $P(W_q > 0)$ y el porcentaje de cumplimiento del SLA ($P(W_q \le 3\text{ min})$). La utilización de cada servidor deberá informarse mediante su media y desviación estándar entre réplicas.
-  * Los intervalos de confianza deberán calcularse utilizando como observaciones las medias obtenidas en cada réplica independiente:
-    $$\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i, \quad s = \sqrt{\frac{1}{n-1}\sum_{i=1}^{n}(X_i - \bar{X})^2}, \quad \text{IC}_{95\%} = \left[\bar{X} - t_{9;\,0,025}\frac{s}{\sqrt{10}}, \; \bar{X} + t_{9;\,0,025}\frac{s}{\sqrt{10}}\right]$$
+* **Procesamiento de datos en Excel:**
+  * Para cada escenario, registrar en Excel los indicadores operativos obtenidos en FlexSim ($W_q, W, L_q, L, \rho$) y contrastarlos con los cálculos teóricos del modelo $M/M/c$.
   * Verificar si la utilización individual de los boxes médicos es homogénea en FlexSim (controlando que la lógica de ruteo sea equitativa, por ejemplo *Round Robin if Available* o *First Available* balanceado).

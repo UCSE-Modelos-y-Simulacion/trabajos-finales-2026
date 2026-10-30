@@ -110,14 +110,13 @@
 ---
 
 ## 3. Pautas para la Simulación en FlexSim y Procesamiento en Excel
-* **Condiciones experimentales:** Mantener constantes los parámetros generales (tasa de arribos $\lambda = 7$, distribución de llegadas de Poisson, costos unitarios de WIP y recursos), modificando únicamente la potencia de prensas y la configuración de inspección de cada escenario. Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica.
-* **Warm-up y réplicas independientes:**
-  * Realizar al menos **10 réplicas independientes de 120 horas efectivas de recolección cada una**, adicionales al período de calentamiento determinado, utilizando semillas aleatorias independientes (*Random Streams*) en cada corrida.
-  * Determinar y justificar el período de calentamiento (*warm-up*) mediante inspección gráfica (método de Welch, análisis de medias móviles o series temporales acumuladas) o criterio analítico, excluyéndolo de la recolección de estadísticas de inventario en proceso (WIP), tiempos de ciclo y cálculo de costos.
+* **Condiciones experimentales:** Mantener constantes los parámetros generales (tasa de arribos $\lambda = 7$, distribución de llegadas de Poisson, costos unitarios de WIP y recursos), modificando únicamente la potencia de prensas y la configuración de inspección de cada escenario.
+* **Warm-up y horizonte de simulación:**
+  * Realizar una corrida de simulación de **120 horas efectivas de recolección** en FlexSim para cada escenario.
+  * Determinar y justificar el período de calentamiento (*warm-up*) mediante inspección gráfica o criterio analítico, excluyéndolo de la recolección de estadísticas de inventario en proceso (WIP), tiempos de ciclo y cálculo de costos.
   * Si se decidiera no utilizar calentamiento, deberá demostrarse cuantitativamente que las condiciones iniciales representan adecuadamente el estado estacionario.
 * **Cálculo del Costo Total de WIP:**
-  * El Costo Total Esperado por Hora simulado deberá calcularse utilizando únicamente las observaciones recolectadas después del período de calentamiento.
-* **Procesamiento estadístico en Excel:**
-  * Para cada indicador de desempeño ($\rho_1$, $\rho_2$, $L_1$, $L_2$, tiempos de espera $W_q$, tiempos en sistema $W$ y costo total), calcular la media muestral $\bar{X}$, el desvío estándar $s$ y el intervalo de confianza del 95%:
-    $$\text{IC}_{95\%} = \left[\bar{X} - t_{9;\,0,025}\frac{s}{\sqrt{10}}, \; \bar{X} + t_{9;\,0,025}\frac{s}{\sqrt{10}}\right]$$
+  * El Costo Total Esperado por Hora simulado deberá calcularse utilizando las observaciones recolectadas después del período de calentamiento en estado estacionario.
+* **Procesamiento de datos en Excel:**
+  * Para cada indicador de desempeño ($\rho_1$, $\rho_2$, $L_1$, $L_2$, tiempos de espera $W_q$, tiempos en sistema $W$ y costo total), registrar los valores simulados en FlexSim y contrastarlos con los resultados analíticos teóricos.
   * **Verificación de utilizaciones:** Contrastar la utilización media teórica de las 10 prensas ($\rho_1 = 70\%$) con la utilización empírica registrada en cada una de las 10 prensas en FlexSim, verificando si la asignación de piezas produce cargas de trabajo balanceadas entre servidores homogéneos.

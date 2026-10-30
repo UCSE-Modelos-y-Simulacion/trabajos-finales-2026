@@ -491,15 +491,14 @@
             </li>
             <li>Resuelva las situaciones que se van planteando utilizando los modelos analíticos de Teoría de Colas y el <strong>Simulador FlexSim</strong>, determinando la dotación médica y la alternativa tecnológica más conveniente para cada escenario. <strong>Mantener constantes las condiciones experimentales entre escenarios, salvo el parámetro modificado explícitamente en cada alternativa.</strong></li>
             <li>
-              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar al menos <strong>10 réplicas independientes, utilizando una semilla aleatoria diferente en cada réplica. Cada réplica deberá comprender un período de calentamiento, determinado y justificado mediante un procedimiento gráfico o estadístico, seguido de 120 horas efectivas de recolección de resultados. El período de calentamiento no deberá incluirse dentro de esas 120 horas.</strong> Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica. Podrá utilizarse, por ejemplo, el método gráfico de Welch, el análisis de series temporales acumuladas u otro procedimiento equivalente debidamente fundamentado. Si se decide no utilizar calentamiento, deberá demostrarse que las condiciones iniciales representan adecuadamente el estado estacionario.
+              <strong>Recolección y procesamiento de datos en Excel (<code>.xlsx</code>):</strong> Realizar una corrida de simulación de <strong>120 horas efectivas de recolección de datos en FlexSim</strong> para cada configuración. La simulación deberá contemplar un período de calentamiento previo suficiente para alcanzar el régimen estacionario (el cual no deberá incluirse dentro de esas 120 horas), o bien demostrar que las condiciones iniciales representan adecuadamente el estado estacionario.
               <br /><br />
-              <strong>Indicadores e Intervalos de Confianza del 95 %:</strong> Calcular intervalos de confianza del 95 % para, como mínimo, $W_q$, $W$, $L_q$, $L$, $P(W_q > 0)$ y el porcentaje de cumplimiento del SLA ($P(W_q \le 3\text{ min})$). La utilización de cada servidor deberá informarse mediante su media y desviación estándar entre réplicas. Los intervalos de confianza deberán calcularse utilizando como observaciones las medias obtenidas en cada réplica independiente. Los costos derivados deberán informarse según corresponda, aclarando el procedimiento de cálculo utilizado:
+              <strong>Indicadores operativos del sistema:</strong> Para cada escenario, recolectar en FlexSim y contrastar con los cálculos teóricos del modelo $M/M/c$ en Excel los siguientes indicadores clave:
               <ul>
                 <li>Factor de utilización del sistema y de cada servidor, verificando si las utilizaciones individuales son equivalentes bajo el supuesto de servidores homogéneos ($\rho$),</li>
-                <li>Probabilidad de esperar en la sala de guardia ($P(W_q > 0)$),</li>
                 <li>Tiempo medio de espera en sala ($W_q$) y tiempo total de permanencia ($W$),</li>
-                <li>Porcentaje de pacientes con espera <strong>menor o igual que 3 minutos</strong> ($P(W_q \le 3\text{ min})$),</li>
-                <li>Longitud media de la cola de pacientes ($L_q$) y cantidad media en el sistema ($L$).</li>
+                <li>Longitud media de la cola de pacientes ($L_q$) y cantidad media en el sistema ($L$),</li>
+                <li>Costos operativos y de dotación médica según corresponda a cada alternativa evaluada.</li>
               </ul>
             </li>
             <li>
@@ -622,7 +621,7 @@
           <h2><i class="fas fa-check-double"></i> RESUMEN DE ENTREGABLES PARA EL DÍA DE LA DEMO</h2>
           <ul>
             <li><strong>Documento Word (<code>.docx</code>):</strong> Informe técnico completo para la Dirección Médica de la Clínica San Martín con la identificación de los 5 elementos del sistema, desarrollo analítico y comparación de las alternativas.</li>
-            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cálculos teóricos mediante la fórmula de Erlang C, incluyendo la probabilidad de espera y la distribución del tiempo de espera en cola, junto con el relevamiento estadístico de las <strong>10 réplicas independientes de 120 horas efectivas de recolección</strong> en FlexSim para cada configuración (media, desvío estándar e intervalo de confianza del 95 %).</li>
+            <li><strong>Planilla Excel (<code>.xlsx</code>):</strong> Cálculos teóricos del modelo $M/M/c$ en Excel junto con la recolección de datos de la simulación de <strong>120 horas efectivas de recolección</strong> en FlexSim para cada configuración y su contrastación con la teoría.</li>
             <li><strong>Modelos FlexSim (<code>.fsm</code>):</strong> Archivos de simulación configurados con la dotación actual, la ampliación de boxes y las alternativas de Tele-Triage e IA Clínica.</li>
             <li><strong>Presentación Ejecutiva (<code>.pptx</code> / PDF):</strong> Diapositivas de síntesis para la defensa oral y demostración en vivo el día de la Demo.</li>
           </ul>
@@ -686,13 +685,13 @@
                 <tr>
                   <td><strong>4. Verificación, validación y recolección estadística</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Registro de al menos 10 réplicas independientes de 120 horas efectivas simuladas en Excel, cálculo de medias, desvíos estándar e intervalos de confianza del 95 %, y validación frente a las fórmulas teóricas de colas.</td>
+                  <td>Registro de la simulación de 120 horas efectivas en FlexSim y procesamiento en Excel, cálculo y comparación de los indicadores operativos ($\rho, L_q, L, W_q, W$) y validación frente a las fórmulas teóricas de colas.</td>
                   <td><strong>20%</strong></td>
                 </tr>
                 <tr>
                   <td><strong>5. Análisis de resultados y sensibilidad</strong></td>
                   <td>Planilla Excel (.xlsx) + Documento Word (.docx)</td>
-                  <td>Interpretación profunda de indicadores ($\rho, P_0, P(\text{espera}), L_q, L, W_q, W$, percentiles de SLA regulatorio) y comparación rigurosa entre escenarios.</td>
+                  <td>Interpretación profunda de indicadores ($\rho, P_0, L_q, L, W_q, W$, nivel de servicio de espera) y comparación rigurosa entre escenarios.</td>
                   <td><strong>15%</strong></td>
                 </tr>
                 <tr>

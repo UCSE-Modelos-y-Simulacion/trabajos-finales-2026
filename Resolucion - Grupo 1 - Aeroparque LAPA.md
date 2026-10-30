@@ -120,17 +120,16 @@
 * **Distinción entre percentiles y niveles de confianza:**
   Un percentil del 95 % o 99 % representa la cobertura de la distribución acumulada de la variable aleatoria $L_q$, mientras que un nivel de confianza del 95 % refiere al intervalo estadístico donde se encuentra la media muestral estimada.
 * **Rol del *Maximum Content* en FlexSim:**
-  En réplicas de 120 horas (~15.840 pasajeros), el estadístico `Maximum Content` de la cola correspondiente en FlexSim registrará picos muestrales extremos (habitualmente entre 25 y 35 pasajeros). Dicho valor debe informarse como **dato complementario de cota extrema** y no como único criterio de diseño, debido a su alta sensibilidad a la duración de la corrida y a la semilla estocástica.
+  En una corrida de 120 horas (~15.840 pasajeros), el estadístico `Maximum Content` de la cola correspondiente en FlexSim registrará picos muestrales extremos (habitualmente entre 25 y 35 pasajeros). Dicho valor debe informarse como **dato complementario de cota extrema** y no como único criterio de dimensionamiento, debido a su sensibilidad a la duración de la corrida y a la semilla estocástica.
 
 ---
 
 ## 3. Pautas para la Simulación en FlexSim y Procesamiento en Excel
-* **Condiciones experimentales:** Mantener constantes las condiciones experimentales entre escenarios, modificando únicamente la estructura de colas y los parámetros asignados a cada caso. Para favorecer la comparación entre alternativas, se recomienda utilizar semillas comunes entre escenarios equivalentes, manteniendo una semilla diferente para cada réplica.
-* **Warm-up y réplicas:**
-  * Realizar al menos **10 réplicas independientes de 120 horas efectivas de recolección de datos cada una**, adicionales al período de calentamiento determinado, utilizando semillas aleatorias diferentes (*Random Streams*) en cada una.
-  * Determinar y justificar el período de calentamiento (*warm-up*) mediante inspección gráfica (método de Welch, series temporales acumuladas) o criterio analítico, excluyéndolo de la recolección de métricas estacionarias.
-  * Si un grupo decidiera no utilizar calentamiento, deberá demostrar analíticamente que iniciar desde tiempo cero con la cola vacía no introduce un sesgo significativo frente a las 120 horas de horizonte simulado.
-* **Procesamiento estadístico en Excel:**
-  * Para cada indicador medio ($\rho$, proporción con espera $> 0$, $W_q$, $W$, $L_q$), calcular:
-    $$\bar{X} = \frac{1}{10}\sum_{i=1}^{10} X_i, \quad s = \sqrt{\frac{1}{9}\sum_{i=1}^{10}(X_i - \bar{X})^2}, \quad \text{IC}_{95\%} = \left[\bar{X} - t_{9;\,0,025}\frac{s}{\sqrt{10}}, \; \bar{X} + t_{9;\,0,025}\frac{s}{\sqrt{10}}\right]$$
+* **Condiciones experimentales:** Mantener constantes las condiciones experimentales entre escenarios, modificando únicamente la estructura de colas y los parámetros asignados a cada caso.
+* **Warm-up y horizonte de simulación:**
+  * Realizar una corrida de simulación de **120 horas efectivas de recolección de datos** en FlexSim para cada escenario.
+  * Determinar y justificar el período de calentamiento (*warm-up*) previo para garantizar el estado estacionario, excluyéndolo de la recolección de métricas.
+  * Si un grupo decidiera no utilizar calentamiento, deberá demostrar que iniciar desde tiempo cero con la cola vacía no introduce un sesgo significativo frente a las 120 horas de horizonte simulado.
+* **Procesamiento de datos en Excel:**
+  * Para cada indicador operativo del sistema ($\rho, W_q, W, L_q, L$), registrar los valores simulados en FlexSim y contrastarlos cuantitativamente con los valores teóricos calculados analíticamente en la planilla Excel.
   * Verificar si la utilización individual de los servidores en FlexSim es equivalente bajo la hipótesis de servidores homogéneos (verificando reglas de ruteo como *Round Robin if Available* o *First Available* balanceado).
