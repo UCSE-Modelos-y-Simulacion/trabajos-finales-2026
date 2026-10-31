@@ -39,8 +39,9 @@ Para la defensa y demostración (Demo), cada grupo deberá presentar los siguien
 
 ---
 
-## 🗓️ Condiciones Formales de Entrega
-* **Fecha y hora límite:** Viernes 20 de noviembre de 2026, 23:59 hs (hora de Argentina).
+## 🗓️ Condiciones Formales de Entrega y Exposición
+* **Fecha y hora límite de entrega de materiales:** Domingo 8 de noviembre de 2026, 23:59 hs (hora de Argentina).
+* **Defensa oral y demostración (Demo):** Martes 10 de noviembre de 2026, en el horario habitual de clases.
 * **Medio de entrega:** Buzón de tareas oficial en el Campus Virtual UCSE (Moodle).
 * **Nomenclatura oficial:**
   * `MS2026_TF_Grupo[X]_Informe.docx`
